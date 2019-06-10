@@ -35,6 +35,7 @@ class Details extends Component {
                 id="mui-pickers-date"
                 label="Date picker"
                 value={dateStart}
+                onChange={this.saveDate('dateStart')}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
@@ -44,6 +45,7 @@ class Details extends Component {
                 id="mui-pickers-date"
                 label="Date picker"
                 value={dateEnd}
+                onChange={this.saveDate('dateEnd')}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
@@ -61,6 +63,11 @@ class Details extends Component {
     console.log(event.target.value);
     this.props.changeHandler(this.props.pickedId, 'city', event.target.value);
   };
+  saveDate(prop) {
+    return (date) => {
+      this.props.changeHandler(this.props.pickedId, prop, date);
+    };
+  }
 }
 
 const styles = (theme) => ({
