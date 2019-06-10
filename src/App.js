@@ -1,23 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import NavBar from './components/NavBar'
-import Root from './containers/Root'
-import {Router} from 'react-router-dom'
-import history from './history'
-import store from './store'
-import {Provider} from 'react-redux'
+import NavBar from './components/NavBar';
 
+const data = [
+  {
+    id: Math.random(),
+    city: 'New York',
+    dateStart: new Date(),
+    dateEnd: new Date(),
+  },
+  {
+    id: Math.random(),
+    city: 'Tokyo',
+    dateStart: new Date(),
+    dateEnd: new Date(),
+  },
+  {
+    id: Math.random(),
+    city: 'London',
+    dateStart: new Date(),
+    dateEnd: new Date(),
+  },
+];
 
-const App = () => (
-    <Provider store={store}>
-        <Router history={history}>
-            <NavBar/>
-            <Root/>
-        </Router>
-    </Provider>
+class App extends Component {
+  state = {
+    trips: data,
+    pickedId: null,
+  };
 
-    
-)
+  changeTrip(id) {
+    this.setState({ pickedId: id });
+  }
 
+  render() {
+    return (
+      <div>
+        <NavBar
+          trips={this.state.trips}
+          changeHandler={this.changeTrip.bind(this)}
+        />
+      </div>
+    );
+  }
+}
 
 export default App;
