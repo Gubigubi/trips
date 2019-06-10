@@ -36,17 +36,31 @@ class App extends Component {
   changheTripsProp(id, prop, value) {
     const modEl = this.state.trips.find((el) => el.id === id);
     modEl[prop] = value;
-
-    this.setState((prevState) => {
-      return {
-        trips: prevState.trips.map((item) => {
-          if (item.id !== id) return item;
-          return {
-            ...modEl,
-          };
-        }),
-      };
-    });
+    if (prop === 'dateStart') {
+      this.setState((prevState) => {
+        return {
+          trips: prevState.trips
+            .map((item) => {
+              if (item.id !== id) return item;
+              return {
+                ...modEl,
+              };
+            })
+            .sort((a, b) => a.dateStart - b.dateStart),
+        };
+      });
+    } else {
+      this.setState((prevState) => {
+        return {
+          trips: prevState.trips.map((item) => {
+            if (item.id !== id) return item;
+            return {
+              ...modEl,
+            };
+          }),
+        };
+      });
+    }
   }
 
   render() {
