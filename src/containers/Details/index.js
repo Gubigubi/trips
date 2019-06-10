@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 import withStyles from '@material-ui/core/styles/withStyles';
 import TextField from '@material-ui/core/TextField';
 class Details extends Component {
@@ -7,7 +12,7 @@ class Details extends Component {
       (el) => el.id === this.props.pickedId,
     );
     if (pickedTrip) {
-      const { city } = pickedTrip;
+      const { city, dateStart, dateEnd } = pickedTrip;
       const { classes } = this.props;
       return (
         <div className={classes.pageContainer}>
@@ -22,6 +27,28 @@ class Details extends Component {
                 },
               }}
             />
+          </div>
+          <div className={classes.calendarContainer}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                margin="normal"
+                id="mui-pickers-date"
+                label="Date picker"
+                value={dateStart}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+              />
+              <KeyboardDatePicker
+                margin="normal"
+                id="mui-pickers-date"
+                label="Date picker"
+                value={dateEnd}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+              />
+            </MuiPickersUtilsProvider>
           </div>
         </div>
       );
@@ -46,6 +73,13 @@ const styles = (theme) => ({
     margin: '40px',
     display: 'flex',
     justifyContent: 'space-around',
+  },
+  calendarContainer: {
+    width: '30%',
+    margin: '40px',
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'flex-end',
   },
   resize: {
     fontSize: 40,
