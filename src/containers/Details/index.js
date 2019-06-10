@@ -7,6 +7,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import withStyles from '@material-ui/core/styles/withStyles';
 import TextField from '@material-ui/core/TextField';
 class Details extends Component {
+  // Picker logic + components
   render() {
     const pickedTrip = this.props.trips.find(
       (el) => el.id === this.props.pickedId,

@@ -3,6 +3,7 @@ import './App.css';
 import NavBar from './components/NavBar';
 import Details from './containers/Details';
 
+//default data for tabs
 const data = [
   {
     id: Math.random(),
@@ -25,17 +26,21 @@ const data = [
 ];
 
 class App extends Component {
+  //default state
   state = {
     trips: data,
     pickedId: null,
   };
 
+  //pickedID changer
   changeTrip(id) {
     this.setState({ pickedId: id });
   }
   changheTripsProp(id, prop, value) {
     const modEl = this.state.trips.find((el) => el.id === id);
     modEl[prop] = value;
+
+    //Changing tabs date if dateChanges
     if (prop === 'dateStart') {
       this.setState((prevState) => {
         return {
